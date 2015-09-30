@@ -3,4 +3,4 @@ server:
 spring:
   oauth2:
     resource:
-      userInfoUri: http://localhost:9999/uaa/user
+      userInfoUri: ${vcap.services.auth-service.credentials.uri:http://localhost:9999/uaa/user}

@@ -3,6 +3,10 @@ spring:
     hibernate:
       ddl-auto: create-drop
 
+security:
+  basic:
+    enabled: false
+
 ---
 
 spring:
@@ -16,3 +20,7 @@ spring:
   profiles: cloud
   jpa:
     database: POSTGRESQL
+
+security:
+  basic:
+    enabled: false

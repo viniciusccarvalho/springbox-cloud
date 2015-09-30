@@ -1,6 +1,8 @@
 spring:
+  profiles: cloud
   application:
     name: springbox-catalog
-  cloud:
-    config:
-      uri: ${vcap.services.springbox-config-service.credentials.uri:http://localhost:8888}
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${vcap.services.config-server.credentials.uri}/eureka/

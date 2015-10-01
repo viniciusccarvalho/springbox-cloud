@@ -12,7 +12,7 @@ zuul:
     springbox-recommendations: /recommendations/**
     user:
       path: /user/**
-      url: http://localhost:9999/uaa/user
+      url: http://auth-server.pcf1.fe.gopivotal.com/uaa/user
 
 spring:
   oauth2:
@@ -21,17 +21,18 @@ spring:
         secure: false
         path: /,/**/*.html
     client:
-      accessTokenUri: http://localhost:9999/uaa/oauth/token
-      userAuthorizationUri: http://localhost:9999/uaa/oauth/authorize
+      accessTokenUri: https://auth-server.pcf1.fe.gopivotal.com/uaa/oauth/token
+      userAuthorizationUri: https://auth-server.pcf1.fe.gopivotal.com/uaa/oauth/authorize
       clientId: acme
       clientSecret: acmesecret
     resource:
-      userInfoUri: http://localhost:9999/uaa/user
+      userInfoUri: https://auth-server.pcf1.fe.gopivotal.com/uaa/user
 
 
 logging:
   level:
-    org.springframework.security: INFO
+    org.springframework.security: DEBUG
     org.springframework.cloud.netflix: INFO
-    com.netflix.zuul: INFO
+    com.netflix.zuul: DEBUG
     io.springbox.apigateway: DEBUG
+    org.apache.http.client: DEBUG

@@ -12,7 +12,7 @@ public class LocalConfig {
 
     @Bean
     public GraphDatabaseService graphDatabaseService() {
-        return new SpringRestGraphDatabase("http://localhost:7474/db/data/");
+        return new SpringRestGraphDatabase("http://springbox.sb05.stations.graphenedb.com:24789/db/data","springbox","dD31yCWjenueI4MQCXU8");
     }
 
 }

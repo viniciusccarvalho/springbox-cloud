@@ -14,4 +14,4 @@ applications:
     - config-server
     - cloud-bus
     - service-registry
-    - auth-server
+    - sso 

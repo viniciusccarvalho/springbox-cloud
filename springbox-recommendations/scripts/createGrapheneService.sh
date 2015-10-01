@@ -1,7 +1,7 @@
 #!/bin/bash
-URL="http://springboxrecommendationsdb.sb02.stations.graphenedb.com:24789/db/data/"
-USERNAME="springbox_recommendations_db"
-PASSWORD="NQEgMqK3WVNZn3mTK4XF"
+URL="http://springbox.sb05.stations.graphenedb.com:24789/db/data/"
+USERNAME="springbox"
+PASSWORD="dD31yCWjenueI4MQCXU8"
 
 X=$IFS
 IFS='/'
@@ -12,4 +12,5 @@ SEC_URL=${TOKENS[0]}//${USERNAME}:${PASSWORD}@${TOKENS[2]}/${TOKENS[3]}/${TOKENS
 IFS=$X
 
 JSON=`printf '{"neo4jUri":"%s"}' $SEC_URL`
+echo $JSON
 cf cups springbox-recommendations-db -p ${JSON}

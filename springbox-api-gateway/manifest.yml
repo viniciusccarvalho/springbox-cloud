@@ -8,8 +8,9 @@ applications:
   path: target/springbox-api-gateway-0.0.1-SNAPSHOT.jar
   env:
     SPRING_PROFILES_ACTIVE: cloud
+    CF_TARGET: https://api.pcf1.fe.gopivotal.com
   services:
-    - springbox-config-service
-    - springbox-cloud-bus-amqp
-    - springbox-service-registry
+    - config-server
+    - cloud-bus
+    - service-registry
     - sso

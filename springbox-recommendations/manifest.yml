@@ -6,8 +6,9 @@ applications:
   instances: 1
   path: target/springbox-recommendations-0.0.1-SNAPSHOT.jar
   env:
-    SPRING_PROFILES_ACTIVE: cloud
-    CF_TARGET: https://api.pcf1.fe.gopivotal.com
+     SPRING_PROFILES_ACTIVE: cloud
+     CF_TARGET: https://api.pcf1.fe.gopivotal.com
+
   services:
   - springbox-recommendations-db
   - config-server

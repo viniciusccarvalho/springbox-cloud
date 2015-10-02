@@ -12,6 +12,7 @@ public class CloudConfig extends AbstractCloudConfig {
 
     @Bean
     GraphDatabaseService graphDatabaseService() {
+
         return connectionFactory().service(GraphDatabaseService.class);
     }
 }

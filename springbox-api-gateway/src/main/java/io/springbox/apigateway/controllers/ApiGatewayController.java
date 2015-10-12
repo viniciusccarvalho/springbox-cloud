@@ -19,7 +19,7 @@ import rx.Observer;
 import java.security.Principal;
 
 @RestController
-public class ApiGatewayController {
+public class    ApiGatewayController {
 
     Log log = LogFactory.getLog(ApiGatewayController.class);
 

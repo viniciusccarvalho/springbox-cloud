@@ -23,4 +23,9 @@ public class GenreController {
     public Genre genre(@PathVariable String mlId) {
         return genreRepository.findByMlId(mlId);
     }
+
+    @RequestMapping(value = "/echo/{path}", method = RequestMethod.GET)
+    public String echo(@PathVariable String path){
+        return path;
+    }
 }

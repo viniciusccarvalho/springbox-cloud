@@ -1,16 +1,18 @@
 package io.springbox.reviews.domain;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.index.Indexed;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Entity
 public class Review {
     @Id
-    private String id;
+    @GeneratedValue
+    private Long id;
 
-    @Indexed
     private String mlId;
 
-    @Indexed
     private String userName;
 
     private String title;
@@ -19,11 +21,11 @@ public class Review {
 
     private int rating;
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

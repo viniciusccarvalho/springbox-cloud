@@ -1,6 +1,25 @@
+
 server:
   port: 8081
 spring:
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+
   oauth2:
     resource:
       userInfoUri: ${vcap.services.sso.credentials.uri:http://localhost:9999}/uaa/user
+
+---
+
+spring:
+  profiles: default
+  jpa:
+    database: HSQL
+
+---
+
+spring:
+  profiles: cloud
+  jpa:
+    database: POSTGRESQL

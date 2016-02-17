@@ -1,8 +1,8 @@
 package io.springbox.reviews.repositories;
 
 import io.springbox.reviews.domain.Review;
-import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.repository.CrudRepository;
 
-public interface ReviewRepository extends MongoRepository<Review, String> {
+public interface ReviewRepository extends CrudRepository<Review, Long> {
     Iterable<Review> findByMlId(String mlId);
 }

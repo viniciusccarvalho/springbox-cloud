@@ -31,6 +31,7 @@ public class SpringboxRecommendationsApplication extends ResourceServerConfigure
                 .and().authorizeRequests()
                 .anyRequest().permitAll();
 
-
     }
+
+    
 }

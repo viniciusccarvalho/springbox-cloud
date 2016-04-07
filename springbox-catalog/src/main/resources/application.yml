@@ -1,7 +1,12 @@
 spring:
   jpa:
+    database: mysql
     hibernate:
       ddl-auto: create-drop
+  datasource:
+    url: jdbc:mysql://localhost/ratings
+    username: root
+    driver-class-name: com.mysql.jdbc.Driver
 
 security:
   basic:
@@ -12,14 +17,14 @@ security:
 spring:
   profiles: default
   jpa:
-    database: HSQL
+    database: MYSQL
 
 ---
 
 spring:
   profiles: cloud
   jpa:
-    database: POSTGRESQL
+    database: MYSQL
 
 security:
   basic:

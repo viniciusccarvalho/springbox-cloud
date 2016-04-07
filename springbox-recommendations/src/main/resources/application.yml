@@ -1,6 +1,18 @@
 server:
   port: 8082
+
 spring:
+  jpa:
+    database: mysql
+    hibernate:
+      ddl-auto: update
+  datasource:
+    url: jdbc:mysql://localhost/ratings
+    username: root
+    driver-class-name: com.mysql.jdbc.Driver
   oauth2:
     resource:
       userInfoUri: ${vcap.services.sso.credentials.uri:http://localhost:9999}/uaa/user
+security:
+  basic:
+    enabled: false

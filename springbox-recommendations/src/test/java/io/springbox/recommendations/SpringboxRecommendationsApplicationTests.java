@@ -1,7 +1,13 @@
 package io.springbox.recommendations;
 
+import java.util.List;
+
+import io.springbox.recommendations.services.RecommendationService;
+import org.apache.mahout.cf.taste.recommender.RecommendedItem;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -11,8 +17,13 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @WebAppConfiguration
 public class SpringboxRecommendationsApplicationTests {
 
+	@Autowired
+	private RecommendationService recommendationService;
+
 	@Test
-	public void contextLoads() {
+	public void contextLoads() throws Exception{
+		List<RecommendedItem> items = recommendationService.userRecommendations(1L);
+		items.size();
 	}
 
 }

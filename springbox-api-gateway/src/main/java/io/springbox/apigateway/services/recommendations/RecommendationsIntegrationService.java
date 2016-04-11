@@ -43,7 +43,7 @@ public class RecommendationsIntegrationService {
                 ParameterizedTypeReference<List<Movie>> responseType = new ParameterizedTypeReference<List<Movie>>() {
                 };
                 log.debug(String.format("Calling springbox-recommendations service to load recommendations for mlId: %s", mlId));
-                return unsecuredTemplate.exchange("http://springbox-recommendations/recommendations/forMovie/{mlId}", HttpMethod.GET, null, responseType, mlId).getBody();
+                return unsecuredTemplate.exchange("http://springbox-recommendations/recommendations/movies/{mlId}", HttpMethod.GET, null, responseType, mlId).getBody();
             }
         };
     }

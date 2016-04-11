@@ -1,8 +1,3 @@
 spring:
-  profiles: cloud
   application:
     name: springbox-catalog
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: ${vcap.services.config-server.credentials.uri}/eureka/

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Arrays;
 import java.util.List;
 
 @RestController
@@ -27,8 +28,9 @@ public class MovieController {
     }
 
     @RequestMapping(value = "/movies/{mlId}", method = RequestMethod.GET)
-    public Movie movie(@PathVariable String mlId) {
-        return movieRepository.findByMlId(mlId);
+    public List<Movie> movie(@PathVariable String mlId) {
+
+        return movieRepository.findByMlIdIn(Arrays.asList(mlId.split(",")));
     }
 
     @RequestMapping(value = "/movies/genre/{genreMlId}", method = RequestMethod.GET)

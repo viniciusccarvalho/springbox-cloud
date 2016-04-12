@@ -11,33 +11,30 @@ public class Genre {
 
     @Id
     @GeneratedValue
-    private Long id;
-
-    @Column(nullable = false)
-    private String mlId;
+    private Integer id;
 
     @Column(nullable = false)
     private String name;
+
+    public Genre(){}
+
+    public Genre(Integer id, String name){
+        this.id = id;
+        this.name = name;
+    }
 
     @ManyToMany(mappedBy = "genres")
     @JsonIgnore
     private List<Movie> movies;
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public String getMlId() {
-        return mlId;
-    }
-
-    public void setMlId(String mlId) {
-        this.mlId = mlId;
-    }
 
     public String getName() {
         return name;

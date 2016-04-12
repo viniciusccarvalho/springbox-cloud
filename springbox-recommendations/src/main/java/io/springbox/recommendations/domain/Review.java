@@ -19,7 +19,7 @@ public class Review {
 
     private String review;
 
-    private Integer rating;
+    private Float rating;
 
     public Long getId() {
         return id;
@@ -61,11 +61,11 @@ public class Review {
         this.review = review;
     }
 
-    public Integer getRating() {
+    public Float getRating() {
         return rating;
     }
 
-    public void setRating(Integer rating) {
+    public void setRating(Float rating) {
         this.rating = rating;
     }
 }

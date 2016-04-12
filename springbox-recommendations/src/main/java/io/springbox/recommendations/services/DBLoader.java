@@ -25,11 +25,11 @@ public class DBLoader {
 
 	private JdbcTemplate template;
 	private ReviewRepository repository;
-	int batchSize = 1000;
-	int loadSize = 10000;
+	int batchSize = 10000;
+	int loadSize = 100000;
 	final String SQL = "INSERT INTO REVIEW (USER_ID, MOVIE_ID, RATING) VALUES (?,?,?)";
-
-	@Value("classpath:u.data")
+	final String delimiter = ",";
+	@Value("classpath:ratings.csv")
 	private Resource ratingsResource;
 
 	@Autowired
@@ -39,7 +39,6 @@ public class DBLoader {
 
 	}
 
-	@PostConstruct
 	public void setup() throws Exception{
 
 		if(repository.count() == 0){
@@ -67,10 +66,10 @@ public class DBLoader {
 		template.batchUpdate(SQL, new BatchPreparedStatementSetter() {
 			@Override
 			public void setValues(PreparedStatement ps, int i) throws SQLException {
-				String[] values = entries.get(i).split("\\t");
+				String[] values = entries.get(i).split(delimiter);
 				ps.setLong(1,Long.valueOf(values[0]));
 				ps.setLong(2,Long.valueOf(values[1]));
-				ps.setInt(3,Integer.valueOf(values[2]));
+				ps.setFloat(3,Float.valueOf(values[2]));
 
 			}
 

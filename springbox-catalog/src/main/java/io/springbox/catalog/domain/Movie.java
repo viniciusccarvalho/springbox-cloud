@@ -8,14 +8,11 @@ import java.util.List;
 public class Movie {
 
     @Id
-    @GeneratedValue
     private Long id;
 
     @Column(nullable = false)
     private String title;
 
-    @Column(nullable = false)
-    private String mlId;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "movies_genres",
@@ -23,8 +20,9 @@ public class Movie {
             inverseJoinColumns = {@JoinColumn(name = "genre_id", referencedColumnName = "id")})
     private List<Genre> genres;
 
-    @Column(nullable = false)
-    private int numberInStock;
+    private String imdbId;
+    private String imdbLink;
+    private Integer tmdbId;
 
     public Long getId() {
         return id;
@@ -50,11 +48,5 @@ public class Movie {
         this.genres = genres;
     }
 
-    public String getMlId() {
-        return mlId;
-    }
 
-    public void setMlId(String mlId) {
-        this.mlId = mlId;
-    }
 }

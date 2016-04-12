@@ -20,12 +20,9 @@ public class GenreController {
     }
 
     @RequestMapping(value = "/genres/{mlId}", method = RequestMethod.GET)
-    public Genre genre(@PathVariable String mlId) {
-        return genreRepository.findByMlId(mlId);
+    public Genre genre(@PathVariable Long id) {
+        return genreRepository.findOne(id);
     }
 
-    @RequestMapping(value = "/echo/{path}", method = RequestMethod.GET)
-    public String echo(@PathVariable String path){
-        return path;
-    }
+
 }

@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
+
+import javax.persistence.criteria.CriteriaBuilder;
 
 @RestController
 public class MovieController {
@@ -29,13 +32,12 @@ public class MovieController {
 
     @RequestMapping(value = "/movies/{mlId}", method = RequestMethod.GET)
     public List<Movie> movie(@PathVariable String mlId) {
-
-        return movieRepository.findByMlIdIn(Arrays.asList(mlId.split(",")));
+        return movieRepository.findByIdIn(Arrays.asList(mlId.split(",")).stream().map(Long::parseLong).collect(Collectors.toList()));
     }
 
     @RequestMapping(value = "/movies/genre/{genreMlId}", method = RequestMethod.GET)
-    public List<Movie> moviesByGenreMlId (@PathVariable String genreMlId) {
-        Genre genre = genreRepository.findByMlId(genreMlId);
+    public List<Movie> moviesByGenreMlId (@PathVariable Long id) {
+        Genre genre = genreRepository.findOne(id);
         return movieRepository.findByGenre(genre);
     }
 }

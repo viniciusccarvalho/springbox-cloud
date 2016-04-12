@@ -22,7 +22,8 @@ public class SpringboxRecommendationsApplicationTests {
 
 	@Test
 	public void contextLoads() throws Exception{
-		List<RecommendedItem> items = recommendationService.userRecommendations(1L);
+		List<RecommendedItem> items = recommendationService.userRecommendations(575L);
+		List<RecommendedItem> movies = recommendationService.movieRecommendations(296L);
 		items.size();
 	}
 

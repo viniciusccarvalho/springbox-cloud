@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/recommendations/")
 public class RecommendationController {
 
+
 	@Autowired
 	private RecommendationService recommendationService;
 

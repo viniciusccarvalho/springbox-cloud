@@ -9,10 +9,9 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface MovieRepository extends CrudRepository<Movie, Long> {
-    public Movie findByMlId(String mlId);
 
     @Query("from Movie movie where :genre member movie.genres")
     public List<Movie> findByGenre(@Param("genre") Genre genre);
 
-    public List<Movie> findByMlIdIn(List<String> mlIds);
+    public List<Movie> findByIdIn(List<Long> ids);
 }

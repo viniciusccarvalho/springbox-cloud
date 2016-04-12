@@ -97,11 +97,6 @@ public class SpringboxAuthServerApplication extends WebMvcConfigurerAdapter {
         @Override
         public void init(AuthenticationManagerBuilder auth) throws Exception {
             auth.userDetailsService(userDetailsService);
-//            auth.inMemoryAuthentication()
-//                    .withUser("vcarvalho").password("secret").roles("USER","ADMIN").and()
-//                    .withUser("mstine").password("secret").roles("USER", "ADMIN").and()
-//                    .withUser("littleidea").password("secret").roles("USER", "ADMIN").and()
-//                    .withUser("starbuxman").password("secret").roles("USER", "ADMIN");
         }
 
     }

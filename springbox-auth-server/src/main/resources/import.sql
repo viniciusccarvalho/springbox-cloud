@@ -1,0 +1,1 @@
+insert into USER(ID,FIRST_NAME,LAST_NAME,EMAIL,PASSWORD) VALUES(1,'Vinicius','Carvalho','vcarvalho@pivotal.io','secret')

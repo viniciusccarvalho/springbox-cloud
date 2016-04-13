@@ -4,7 +4,7 @@ spring:
     hibernate:
       ddl-auto: update
   datasource:
-    url: jdbc:mysql://localhost/ratings
+    url: jdbc:mysql://localhost/ml2
     username: root
     driver-class-name: com.mysql.jdbc.Driver
 

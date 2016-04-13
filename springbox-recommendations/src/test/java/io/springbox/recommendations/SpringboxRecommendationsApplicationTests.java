@@ -3,7 +3,13 @@ package io.springbox.recommendations;
 import java.util.List;
 
 import io.springbox.recommendations.services.RecommendationService;
+import org.apache.mahout.cf.taste.common.TasteException;
+import org.apache.mahout.cf.taste.eval.RecommenderBuilder;
+import org.apache.mahout.cf.taste.eval.RecommenderEvaluator;
+import org.apache.mahout.cf.taste.impl.eval.AverageAbsoluteDifferenceRecommenderEvaluator;
+import org.apache.mahout.cf.taste.model.DataModel;
 import org.apache.mahout.cf.taste.recommender.RecommendedItem;
+import org.apache.mahout.cf.taste.recommender.Recommender;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -20,11 +26,19 @@ public class SpringboxRecommendationsApplicationTests {
 	@Autowired
 	private RecommendationService recommendationService;
 
+	@Autowired
+	private DataModel dataModel;
+
 	@Test
 	public void contextLoads() throws Exception{
-		List<RecommendedItem> items = recommendationService.userRecommendations(575L);
-		List<RecommendedItem> movies = recommendationService.movieRecommendations(296L);
-		items.size();
+		RecommenderEvaluator evaluator = new AverageAbsoluteDifferenceRecommenderEvaluator();
+		double score = evaluator.evaluate(new RecommenderBuilder() {
+			@Override
+			public Recommender buildRecommender(DataModel dataModel) throws TasteException {
+				return recommendationService.getMovieRecommender();
+			}
+		}, null, dataModel, 0.7, 1.0);
+		System.out.println(score);
 	}
 
 }

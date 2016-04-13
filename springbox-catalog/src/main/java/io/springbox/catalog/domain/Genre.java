@@ -10,7 +10,6 @@ import java.util.List;
 public class Genre {
 
     @Id
-    @GeneratedValue
     private Integer id;
 
     @Column(nullable = false)

@@ -28,8 +28,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class RecommendationService {
 
-	@Autowired
-	private DBLoader loader;
+
 
 	@Autowired
 	private DataModel dataModel;
@@ -39,7 +38,6 @@ public class RecommendationService {
 
 	@PostConstruct
 	public void init() throws Exception{
-		loader.setup();
 		this.userRecommender = userRecommender();
 		this.movieRecommender = movieRecommender();
 	}
@@ -78,6 +76,11 @@ public class RecommendationService {
 		}
 	}
 
+	public Recommender getUserRecommender() {
+		return userRecommender;
+	}
 
-
+	public Recommender getMovieRecommender() {
+		return movieRecommender;
+	}
 }

@@ -13,5 +13,5 @@ public interface MovieRepository extends CrudRepository<Movie, Long> {
     @Query("from Movie movie where :genre member movie.genres")
     public List<Movie> findByGenre(@Param("genre") Genre genre);
 
-    public List<Movie> findByIdIn(List<Long> ids);
+    public List<Movie> findByMlIdIn(List<Integer> ids);
 }

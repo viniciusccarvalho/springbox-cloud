@@ -48,7 +48,7 @@ public class DBLoader {
 			List<Movie> movies = new ArrayList<>();
 			while((contents = reader.readNext()) != null){
 				Movie movie = new Movie();
-				movie.setId(Long.valueOf(contents[0]));
+				movie.setId(Integer.valueOf(contents[0]));
 				movie.setTitle(contents[1]);
 				movie.setGenres(getGenre(contents[2]));
 				movies.add(movie);

@@ -1,7 +1,8 @@
 package io.springbox.catalog.repositories;
 
-import io.springbox.catalog.domain.Genre;
 import org.springframework.data.repository.CrudRepository;
+
+import io.springbox.catalog.domain.Genre;
 
 public interface GenreRepository extends CrudRepository<Genre, Long> {
 }

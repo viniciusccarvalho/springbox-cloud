@@ -1,0 +1,12 @@
+server:
+  port: 9000
+
+security:
+  user:
+    password: password
+    name: user
+zuul:
+  routes:
+    springbox-catalog: /catalog/**
+    springbox-reviews: /reviews/**
+    springbox-recommendations: /recommendations/**

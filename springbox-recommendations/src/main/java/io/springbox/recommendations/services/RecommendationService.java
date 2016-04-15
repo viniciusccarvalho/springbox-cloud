@@ -9,6 +9,7 @@ import org.apache.mahout.cf.taste.impl.neighborhood.NearestNUserNeighborhood;
 import org.apache.mahout.cf.taste.impl.recommender.CachingRecommender;
 import org.apache.mahout.cf.taste.impl.recommender.GenericItemBasedRecommender;
 import org.apache.mahout.cf.taste.impl.recommender.GenericUserBasedRecommender;
+import org.apache.mahout.cf.taste.impl.similarity.CachingItemSimilarity;
 import org.apache.mahout.cf.taste.impl.similarity.PearsonCorrelationSimilarity;
 import org.apache.mahout.cf.taste.model.DataModel;
 import org.apache.mahout.cf.taste.model.JDBCDataModel;
@@ -34,7 +35,7 @@ public class RecommendationService {
 	private DataModel dataModel;
 
 	private Recommender userRecommender;
-	private Recommender movieRecommender;
+	private GenericItemBasedRecommender movieRecommender;
 
 	@PostConstruct
 	public void init() throws Exception{
@@ -52,9 +53,10 @@ public class RecommendationService {
 
 
 
-	public Recommender movieRecommender() throws Exception{
+	public GenericItemBasedRecommender movieRecommender() throws Exception{
 		PearsonCorrelationSimilarity similarity = new PearsonCorrelationSimilarity(dataModel);
-		return new CachingRecommender(new GenericItemBasedRecommender(dataModel,similarity));
+		CachingItemSimilarity itemSimilarity = new CachingItemSimilarity(similarity,dataModel);
+		return new GenericItemBasedRecommender(dataModel,itemSimilarity);
 	}
 
 
@@ -69,7 +71,7 @@ public class RecommendationService {
 
 	public List<RecommendedItem> movieRecommendations(Long movieId){
 		try {
-			return movieRecommender.recommend(movieId,10);
+			return movieRecommender.mostSimilarItems(movieId,10);
 		}
 		catch (TasteException e) {
 			throw new RuntimeException("Could not compute recommendation for movie");

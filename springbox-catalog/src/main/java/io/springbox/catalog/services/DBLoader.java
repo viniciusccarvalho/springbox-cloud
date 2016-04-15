@@ -3,25 +3,20 @@ package io.springbox.catalog.services;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Scanner;
 import java.util.concurrent.atomic.AtomicInteger;
-
-import javax.annotation.PostConstruct;
-
-import au.com.bytecode.opencsv.CSVReader;
-import com.sun.tools.javac.jvm.Gen;
-import io.springbox.catalog.domain.Genre;
-import io.springbox.catalog.domain.Movie;
-import io.springbox.catalog.repositories.GenreRepository;
-import io.springbox.catalog.repositories.MovieRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
+
+import au.com.bytecode.opencsv.CSVReader;
+import io.springbox.catalog.domain.Genre;
+import io.springbox.catalog.domain.Movie;
+import io.springbox.catalog.repositories.GenreRepository;
+import io.springbox.catalog.repositories.MovieRepository;
 
 /**
  * @author Vinicius Carvalho

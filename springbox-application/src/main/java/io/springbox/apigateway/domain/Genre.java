@@ -1,23 +1,14 @@
-package io.springbox.catalog.domain;
+package io.springbox.apigateway.domain;
 
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-@Entity
-@Table(name = "genres")
 public class Genre {
 
-    @Id
     private Integer id;
 
-    @Column(nullable = false)
     private String name;
 
     public Genre(){}
@@ -27,7 +18,6 @@ public class Genre {
         this.name = name;
     }
 
-    @ManyToMany(mappedBy = "genres")
     @JsonIgnore
     private List<Movie> movies;
 

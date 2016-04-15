@@ -13,7 +13,7 @@ public class Review {
 
     private String mlId;
 
-    private String userNaame;
+    private String userName;
 
     private String title;
 

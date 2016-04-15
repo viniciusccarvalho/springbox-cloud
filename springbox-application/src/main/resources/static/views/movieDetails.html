@@ -1,0 +1,17 @@
+<div ng-model="movie">
+<div class="row"  style="margin-left: 8px; margin-top: 16px">
+    <div class="col-lg-4">
+        <img src="http://image.tmdb.org/t/p/w342/{{movie.posterPath}}"/>
+    </div>
+    <div class="col-lg-8">
+        <div class="row"><span class="movie_title">{{movie.title}}</span> <span class="movie_year">({{movie.releaseDate | date:'yyyy'}})</span></div>
+        <div class="row"><span class="movie_overview">Overview: {{movie.overview}}</span></div>
+    </div>
+</div>
+<div class="row movie-gallery-header" >More like this</div>
+<div class="row" style="margin-top: 12px;">
+    <div ng-repeat="rec in movie.recommendations" style="float: left; margin-right: 16px">
+        <img src="http://image.tmdb.org/t/p/w185/{{rec.posterPath}}">
+    </div>
+</div>
+</div>

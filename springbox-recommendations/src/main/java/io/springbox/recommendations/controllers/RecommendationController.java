@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author Vinicius Carvalho
  */
 @RestController
-@RequestMapping("/recommendations/")
+
 public class RecommendationController {
 
 

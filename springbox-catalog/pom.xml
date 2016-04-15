@@ -29,9 +29,9 @@
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.h2database</groupId>
-			<artifactId>h2database</artifactId>
-			<version>1.0.20061217</version>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<version>1.4.191</version>
 		</dependency>
 		<dependency>
 			<groupId>mysql</groupId>

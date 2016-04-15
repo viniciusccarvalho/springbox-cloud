@@ -1,4 +1,4 @@
-package io.springbox.catalog.domain;
+package io.springbox.apigateway.domain;
 
 import java.util.List;
 
@@ -32,8 +32,6 @@ public class Movie {
     private float voteAverage;
     private int voteCount;
     private Integer mlId;
-    @Column(name = "has_recommendations")
-    private boolean hasRecommendations;
 
     @ManyToMany(cascade = CascadeType.DETACH)
     @JoinTable(name = "movies_genres",
@@ -171,13 +169,5 @@ public class Movie {
 
     public void setGenres(List<Genre> genres) {
         this.genres = genres;
-    }
-
-    public boolean isHasRecommendations() {
-        return hasRecommendations;
-    }
-
-    public void setHasRecommendations(boolean hasRecommendations) {
-        this.hasRecommendations = hasRecommendations;
     }
 }

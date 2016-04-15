@@ -1,4 +1,4 @@
-package io.springbox.catalog.domain;
+package io.springbox.apigateway.domain;
 
 import java.util.List;
 

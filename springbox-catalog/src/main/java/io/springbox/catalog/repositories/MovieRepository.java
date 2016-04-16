@@ -13,15 +13,21 @@ import io.springbox.catalog.domain.Movie;
 
 public interface MovieRepository extends PagingAndSortingRepository<Movie, Long> {
 
-    @Query("from Movie movie where movie.hasRecommendations = true and :genre member movie.genres")
+
+    public List<Movie> findByIdIn(List<Integer> ids);
+    public List<Movie> findByOrderByPopularityDesc(Pageable page);
+
+    @Query("from Movie movie where :genre member movie.genres")
     public List<Movie> findByGenre(@Param("genre") Genre genre);
 
-
-    public List<Movie> findByHasRecommendationsOrderByPopularityDesc(boolean hasRecommendations, Pageable pageable);
-
-    public List<Movie> findByMlIdInAndHasRecommendations(List<Integer> ids, boolean hasRecommendations);
-
-    @Query("select m.mlId from Movie m where m.hasRecommendations = true and :genre member m.genres")
+    @Query("select m.id from Movie m where :genre member m.genres")
     public List<Integer> findAllIdsByGenre(@Param("genre") Genre genre);
+
+    @Query("select m.similar from Movie m where m.id = :movieId")
+    public List<Movie> findSimilar(@Param("movieId")Integer movieId, Pageable page);
+
+
+
+
 
 }

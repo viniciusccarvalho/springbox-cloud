@@ -4,12 +4,20 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.ConstraintMode;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.ForeignKey;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table(name="movies")
@@ -31,15 +39,22 @@ public class Movie {
     private float popularity;
     private float voteAverage;
     private int voteCount;
-    private Integer mlId;
-    @Column(name = "has_recommendations")
-    private boolean hasRecommendations;
 
     @ManyToMany(cascade = CascadeType.DETACH)
     @JoinTable(name = "movies_genres",
+            foreignKey = @ForeignKey(value = ConstraintMode.NO_CONSTRAINT, name = "none"),
             joinColumns = {@JoinColumn(name = "movie_id", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "genre_id", referencedColumnName = "id")})
     private List<Genre> genres;
+
+    @ManyToMany(cascade = {CascadeType.MERGE,CascadeType.DETACH,CascadeType.PERSIST, CascadeType.REFRESH}, fetch = FetchType.LAZY)
+    @JoinTable(name="movies_similar",
+            foreignKey = @ForeignKey(value = ConstraintMode.NO_CONSTRAINT, name = "none"),
+            joinColumns = {@JoinColumn(name="movie_id",referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "similar_id", referencedColumnName = "id")})
+    @OrderBy(value = "voteAverage desc")
+    @JsonIgnore
+    private List<Movie> similar;
 
 
     public Integer getId() {
@@ -157,13 +172,6 @@ public class Movie {
         this.voteCount = voteCount;
     }
 
-    public Integer getMlId() {
-        return mlId;
-    }
-
-    public void setMlId(Integer mlId) {
-        this.mlId = mlId;
-    }
 
     public List<Genre> getGenres() {
         return genres;
@@ -173,11 +181,11 @@ public class Movie {
         this.genres = genres;
     }
 
-    public boolean isHasRecommendations() {
-        return hasRecommendations;
+    public List<Movie> getSimilar() {
+        return similar;
     }
 
-    public void setHasRecommendations(boolean hasRecommendations) {
-        this.hasRecommendations = hasRecommendations;
+    public void setSimilar(List<Movie> similar) {
+        this.similar = similar;
     }
 }

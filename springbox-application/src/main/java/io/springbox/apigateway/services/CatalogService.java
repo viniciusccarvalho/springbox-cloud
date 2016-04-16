@@ -31,17 +31,16 @@ public class CatalogService {
 		this.template = template;
 	}
 
-
+	/**
+	 * @deprecated
+	 * @return
+	 */
 	public List<Movie> findPopular(){
 		List<Movie> movies = template.exchange("http://SPRINGBOX-CATALOG/movies/popular/{howMany}",
 												HttpMethod.GET,
 												null,
 												new ParameterizedTypeReference<List<Movie>>(){},
 												5).getBody();
-		movies.forEach(movie -> {
-			movie.setBackdropPath(String.format("%s/%s/%s",base_url,popular_size,movie.getBackdropPath()));
-			movie.setPosterPath(String.format("%s/%s/%s",base_url,poster_size,movie.getPosterPath()));
-		});
 		return movies;
 	}
 
@@ -56,10 +55,6 @@ public class CatalogService {
 
 	public List<Movie> randomMovies(int genreId){
 		List<Movie> movies = template.exchange("http://SPRINGBOX-CATALOG/movies/random/genre/{genreId}", HttpMethod.GET, null, new ParameterizedTypeReference<List<Movie>>(){}, genreId).getBody();
-		movies.forEach(movie -> {
-			movie.setBackdropPath(String.format("%s/%s/%s",base_url,genre_size,movie.getBackdropPath()));
-			movie.setPosterPath(String.format("%s/%s/%s",base_url,poster_size,movie.getPosterPath()));
-		});
 		return movies;
 	}
 

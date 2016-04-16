@@ -9,9 +9,9 @@
     </div>
 </div>
 <div class="row movie-gallery-header" >More like this</div>
-<div class="row" style="margin-top: 12px;">
-    <div ng-repeat="rec in movie.recommendations" style="float: left; margin-right: 16px">
-        <img src="http://image.tmdb.org/t/p/w185/{{rec.posterPath}}">
+<div class="row" style="margin-top: 2px;">
+    <div ng-repeat="rec in movie.recommendations" style="float: left; margin-right: 8px; margin-top: 12px; margin-left: 8px;">
+        <a href="#/details/{{rec.id}}"><img src="http://image.tmdb.org/t/p/w185/{{rec.posterPath}}"></a>
     </div>
 </div>
 </div>

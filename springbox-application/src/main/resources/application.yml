@@ -10,3 +10,4 @@ zuul:
     springbox-catalog: /catalog/**
     springbox-reviews: /reviews/**
     springbox-recommendations: /recommendations/**
+

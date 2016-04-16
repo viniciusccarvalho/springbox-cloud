@@ -11,6 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.springbox.catalog.domain.Genre;
@@ -32,15 +33,23 @@ public class MovieController {
         return movieRepository.findAll();
     }
 
-    @RequestMapping(value = "/movies/{mlId}", method = RequestMethod.GET)
-    public List<Movie> movie(@PathVariable String mlId) {
-        return movieRepository.findByMlIdInAndHasRecommendations(Arrays.asList(mlId.split(",")).stream().map(Integer::parseInt).collect(Collectors.toList()),true);
+    @RequestMapping(value = "/movies/{id}", method = RequestMethod.GET)
+    public List<Movie> movie(@PathVariable String id) {
+        List<Movie> movies = movieRepository.findByIdIn(Arrays.asList(id.split(",")).stream().map(Integer::parseInt).collect(Collectors.toList()));
+        return movies;
     }
 
-    @RequestMapping(value="/movies/popular/{howMany}", method = RequestMethod.GET)
-    public List<Movie> popular(@PathVariable Integer howMany){
-        Pageable pageable = new PageRequest(0,howMany);
-        return movieRepository.findByHasRecommendationsOrderByPopularityDesc(true,pageable);
+    @RequestMapping(value = "/movies/{id}/similar", method = RequestMethod.GET)
+    public List<Movie> movie(@PathVariable Integer id, @RequestParam(value = "limit", defaultValue = "10")Integer limit) {
+        Pageable pageable = new PageRequest(0,limit);
+        List<Movie> movies = movieRepository.findSimilar(id,pageable);
+        return movies;
+    }
+
+    @RequestMapping(value="/movies/popular/{limit}", method = RequestMethod.GET)
+    public List<Movie> popular(@PathVariable Integer limit){
+        Pageable pageable = new PageRequest(0,limit);
+        return movieRepository.findByOrderByPopularityDesc(pageable);
     }
 
     @RequestMapping(value = "/movies/genre/{id}", method = RequestMethod.GET)
@@ -55,7 +64,7 @@ public class MovieController {
         genre.setId(genreId);
         List<Integer> ids = movieRepository.findAllIdsByGenre(genre);
         Collections.shuffle(ids);
-        return movieRepository.findByMlIdInAndHasRecommendations(ids.subList(0,Math.min(10,ids.size())),true);
+        return movieRepository.findByIdIn(ids.subList(0,Math.min(10,ids.size())));
     }
 
 }

@@ -10,5 +10,6 @@ applications:
     SPRING_PROFILES_ACTIVE: cloud
     CF_TARGET: https://api.pcf10.cloud.fe.pivotal.io
   services:
+    - circuit-breaker-dashboard
     - config-server
     - service-registry

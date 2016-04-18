@@ -3,16 +3,16 @@ package io.springbox.reviews.controllers;
 import io.springbox.reviews.domain.Review;
 import io.springbox.reviews.repositories.ReviewRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cloud.security.oauth2.resource.EnableOAuth2Resource;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@EnableOAuth2Resource
+@EnableResourceServer
 public class ReviewController extends ResourceServerConfigurerAdapter {
 
     @Autowired

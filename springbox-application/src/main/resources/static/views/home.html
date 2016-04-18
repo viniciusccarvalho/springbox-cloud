@@ -1,12 +1,12 @@
 <div class="row" ng-model="popularMovies">
-<carousel interval="myInterval">
-    <slide ng-repeat="movie in popularMovies" active="movie.active" >
-        <a href="#/details/{{movie.id}}"> <img ng-src="{{movie.backdropPath}}" style="margin:auto;"></a>
+    <uib-carousel active="active" interval="myInterval" no-wrap="noWrapSlides">
+        <uib-slide ng-repeat="slide in slides" index="slide.id">
+        <a href="#/details/{{slide.mid}}"> <img ng-src="{{slide.image}}" style="margin:auto;"></a>
         <div class="carousel-caption">
-            <h4>{{movie.title}}</h4>
+            <h4>{{slide.title}}</h4>
         </div>
-    </slide>
-</carousel>
+        </uib-slide>
+    </uib-carousel>
 </div>
 <div ng-repeat="genre in genres">
 <div class="row movie-gallery-header" >{{genre.name}}</div>
@@ -16,7 +16,7 @@
             <div class="tile" ng-repeat="movie in genre.movies">
 
                 <div class="tile__media">
-                    <img class="tile__img" src="{{movie.backdropPath}}" alt=""  />
+                    <img class="tile__img" ng-src="{{movie.backdropPath}}" alt=""  />
                 </div>
                 <div class="tile__details" ng-click="loadMovie(movie.id)">
                     <div class="tile__title">

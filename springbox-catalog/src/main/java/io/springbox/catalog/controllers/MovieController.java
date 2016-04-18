@@ -53,7 +53,7 @@ public class MovieController {
     }
 
     @RequestMapping(value = "/movies/genre/{id}", method = RequestMethod.GET)
-    public List<Movie> moviesByGenreMlId (@PathVariable Long id) {
+    public List<Movie> moviesByGenreMlId (@PathVariable Integer id) {
         Genre genre = genreRepository.findOne(id);
         return movieRepository.findByGenre(genre);
     }

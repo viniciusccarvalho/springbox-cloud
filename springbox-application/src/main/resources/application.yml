@@ -12,6 +12,6 @@ management:
 zuul:
   routes:
     springbox-catalog: /catalog/**
-    springbox-reviews: /reviews/**
+    springbox-ratings: /ratings/**
     springbox-recommendations: /recommendations/**
 

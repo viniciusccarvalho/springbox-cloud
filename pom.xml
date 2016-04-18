@@ -16,6 +16,7 @@
         <module>springbox-recommendations</module>
         <module>springbox-auth-server</module>
         <module>springbox-application</module>
+        <module>springbox-ratings</module>
     </modules>
 
     <parent>

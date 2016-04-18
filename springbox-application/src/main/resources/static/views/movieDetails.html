@@ -1,17 +1,18 @@
-<div ng-model="movie">
+<div>
 <div class="row"  style="margin-left: 8px; margin-top: 16px">
     <div class="col-lg-4">
-        <img src="http://image.tmdb.org/t/p/w342/{{movie.posterPath}}"/>
+        <img ng-src="http://image.tmdb.org/t/p/w342/{{movie.posterPath}}"/>
     </div>
     <div class="col-lg-8">
         <div class="row"><span class="movie_title">{{movie.title}}</span> <span class="movie_year">({{movie.releaseDate | date:'yyyy'}})</span></div>
         <div class="row"><span class="movie_overview">Overview: {{movie.overview}}</span></div>
+        <div class="row">Rating: <uib-rating ng-model="rate" max=10 read-only="isReadonly" on-hover="hoveringOver(value)" on-leave="overStar = null"  aria-labelledby="default-rating"></uib-rating></div>
     </div>
 </div>
 <div class="row movie-gallery-header" >More like this</div>
 <div class="row" style="margin-top: 2px;">
     <div ng-repeat="rec in movie.recommendations" style="float: left; margin-right: 8px; margin-top: 12px; margin-left: 8px;">
-        <a href="#/details/{{rec.id}}"><img src="http://image.tmdb.org/t/p/w185/{{rec.posterPath}}"></a>
+        <a href="#/details/{{rec.id}}"><img ng-src="http://image.tmdb.org/t/p/w185/{{rec.posterPath}}"></a>
     </div>
 </div>
 </div>

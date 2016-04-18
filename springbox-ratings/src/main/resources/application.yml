@@ -1,3 +1,6 @@
+server:
+  port: 8081
+
 security:
   basic:
     enabled: false
@@ -6,8 +9,6 @@ management:
     enabled: false
 
 logging.level.org.springframework.security: DEBUG
-
-
 ---
 spring:
   profiles: default

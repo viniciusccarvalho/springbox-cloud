@@ -1,4 +1,4 @@
-var springbox = angular.module('springbox', ['ngRoute','ui.bootstrap'])
+var springbox = angular.module('springbox', ['ngRoute','ngAnimate','ui.bootstrap'])
 
 springbox.config(function ($routeProvider, $httpProvider) {
     $routeProvider
@@ -18,7 +18,7 @@ springbox.run(function($rootScope){
     $rootScope.config = {
         popularSize: 5,
         images: {
-            base_url: "http://image.tmdb.org/t/p/",
+            base_url: "https://image.tmdb.org/t/p/",
             popular_size: "w1280",
             detail_size: "w342",
             similar_size: "w185",
@@ -26,4 +26,8 @@ springbox.run(function($rootScope){
 
         }
     }
+});
+
+springbox.factory('userStore', function(){
+    return {};
 });

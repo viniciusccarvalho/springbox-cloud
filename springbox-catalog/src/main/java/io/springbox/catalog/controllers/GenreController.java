@@ -21,7 +21,7 @@ public class GenreController {
     }
 
     @RequestMapping(value = "/genres/{mlId}", method = RequestMethod.GET)
-    public Genre genre(@PathVariable Long id) {
+    public Genre genre(@PathVariable Integer id) {
         return genreRepository.findOne(id);
     }
 

@@ -7,7 +7,7 @@ spring:
     hibernate:
       ddl-auto: update
   datasource:
-    url: jdbc:mysql://localhost/ml2
+    url: jdbc:mysql://localhost/springbox-movies
     username: root
     driver-class-name: com.mysql.jdbc.Driver
   oauth2:

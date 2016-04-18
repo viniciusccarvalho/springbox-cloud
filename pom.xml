@@ -14,7 +14,6 @@
         <module>springbox-catalog</module>
         <module>springbox-reviews</module>
         <module>springbox-recommendations</module>
-        <module>springbox-api-gateway</module>
         <module>springbox-auth-server</module>
         <module>springbox-application</module>
     </modules>

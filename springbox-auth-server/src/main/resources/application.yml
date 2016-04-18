@@ -2,8 +2,8 @@ server:
   port: 9999
   context-path: /uaa
 security:
-  user:
-    password: password
+  basic:
+    enabled: false
 spring:
   jpa:
     database: h2

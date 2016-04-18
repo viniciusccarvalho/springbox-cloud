@@ -1,4 +1,20 @@
+security:
+  oauth2:
+    client:
+      client-id: springbox
+      client-secret: springrocks
+    resource:
+      user-info-uri: http://localhost:9999/uaa/user
+      token-info-uri: http://localhost:9999/uaa/oauth/check_token
+management:
+  security:
+    enabled: false
+
+logging.level.org.springframework.security: DEBUG
+
+---
 spring:
+  profiles: default
   jpa:
     database: mysql
     hibernate:
@@ -7,25 +23,8 @@ spring:
     url: jdbc:mysql://localhost/springbox-movies
     username: root
     driver-class-name: com.mysql.jdbc.Driver
-
-security:
-  basic:
-    enabled: false
-
 ---
-
-spring:
-  profiles: default
-  jpa:
-    database: MYSQL
-
----
-
 spring:
   profiles: cloud
   jpa:
     database: MYSQL
-
-security:
-  basic:
-    enabled: false

@@ -9,6 +9,8 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.authentication.configurers.GlobalAuthenticationConfigurerAdapter;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.oauth2.common.DefaultOAuth2AccessToken;
@@ -18,6 +20,7 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.A
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
+import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.security.oauth2.provider.token.AuthorizationServerTokenServices;
 import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
@@ -39,6 +42,7 @@ import io.springbox.authserver.security.UserRepositoryUserDetailsService;
 @SpringBootApplication
 @RestController
 @EnableResourceServer
+@EnableAuthorizationServer
 public class SpringboxAuthServerApplication extends WebMvcConfigurerAdapter {
 
     @RequestMapping("/user")
@@ -73,14 +77,22 @@ public class SpringboxAuthServerApplication extends WebMvcConfigurerAdapter {
             return converter;
         }
 
+        @Override
+        public void configure(AuthorizationServerSecurityConfigurer oauthServer)
+                throws Exception {
 
+            oauthServer
+                    .allowFormAuthenticationForClients()
+                    .tokenKeyAccess("permitAll()").checkTokenAccess(
+                    "permitAll()");
+        }
 
         @Override
         public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
 
             clients.inMemory()
-                    .withClient("acme")
-                    .secret("acmesecret")
+                    .withClient("springbox")
+                    .secret("springrocks")
 
                     .authorizedGrantTypes("authorization_code", "refresh_token",
                             "password").scopes("openid");
@@ -116,5 +128,29 @@ public class SpringboxAuthServerApplication extends WebMvcConfigurerAdapter {
             return super.enhance(customAccessToken, authentication);
         }
 
+    }
+
+    @Configuration
+    protected static class SecurityConfig extends WebSecurityConfigurerAdapter{
+        @Autowired
+        private AuthenticationManager authenticationManager;
+
+        @Override
+        protected void configure(HttpSecurity http) throws Exception {
+            http
+                    .formLogin()
+                        .loginPage("/login")
+                            .permitAll()
+                    .and()
+                        .authorizeRequests()
+                            .antMatchers("/uaa/users/**").permitAll()
+                            .anyRequest()
+                                .authenticated();
+        }
+
+        @Override
+        protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+            auth.parentAuthenticationManager(authenticationManager);
+        }
     }
 }

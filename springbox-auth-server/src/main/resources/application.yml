@@ -1,12 +1,12 @@
 server:
   port: 9999
   context-path: /uaa
-security:
-  basic:
-    enabled: false
 spring:
   jpa:
     database: h2
     hibernate:
       ddl-auto: create-drop
 
+logging:
+  level:
+    org.springframework.security: DEBUG

@@ -5,7 +5,6 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.netflix.discovery.converters.Auto;
 import io.springbox.apigateway.domain.Movie;
 
 import org.springframework.beans.factory.annotation.Autowired;

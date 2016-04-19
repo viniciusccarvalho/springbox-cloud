@@ -12,7 +12,6 @@
 
     <modules>
         <module>springbox-catalog</module>
-        <module>springbox-reviews</module>
         <module>springbox-recommendations</module>
         <module>springbox-auth-server</module>
         <module>springbox-application</module>
@@ -91,10 +90,17 @@
             <name>Spring Milestones</name>
             <url>https://repo.spring.io/milestone/</url>
             <snapshots>
-                <enabled>true</enabled>
+                <enabled>false</enabled>
             </snapshots>
         </repository>
-
+        <repository>
+            <id>spring-releases-local</id>
+            <name>Spring Releases</name>
+            <url>http://repo.spring.io/libs-release-local</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
         <repository>
             <id>spring-release</id>
             <name>Spring Release</name>

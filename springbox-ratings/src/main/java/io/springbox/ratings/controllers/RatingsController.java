@@ -1,5 +1,6 @@
-package io.springbox.ratings;
+package io.springbox.ratings.controllers;
 
+import java.security.Principal;
 import java.util.List;
 
 import io.springbox.ratings.domain.Rating;
@@ -8,6 +9,7 @@ import io.springbox.ratings.repository.RatingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,10 +30,8 @@ public class RatingsController {
 	}
 
 	@RequestMapping(value = "/", method = RequestMethod.POST, consumes = "application/json")
-	public ResponseEntity<String> createRating(@RequestBody  Rating rating){
-		if(rating.getUserId() == null){
-			rating.setUserId(1);
-		}
+	public ResponseEntity<String> createRating(@RequestBody  Rating rating, Principal user){
+		OAuth2Authentication authentication = (OAuth2Authentication) user;
 		repository.save(rating);
 		return new ResponseEntity<String>("", HttpStatus.CREATED);
 	}

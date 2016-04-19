@@ -2,13 +2,17 @@ server:
   port: 8081
 
 security:
-  basic:
-    enabled: false
-management:
-  security:
-    enabled: false
+  oauth2:
+    client:
+      client-id: springbox
+      client-secret: springrocks
+      authorized-grant-types: authorization_code,refresh_token,password
+    resource:
+      user-info-uri: http://localhost:9999/uaa/user
+      token-info-uri: http://localhost:9999/uaa/oauth/check_token
 
 logging.level.org.springframework.security: DEBUG
+
 ---
 spring:
   profiles: default

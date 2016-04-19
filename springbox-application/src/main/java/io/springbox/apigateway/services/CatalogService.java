@@ -7,6 +7,7 @@ import io.springbox.apigateway.domain.Genre;
 import io.springbox.apigateway.domain.Movie;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
@@ -26,9 +27,10 @@ public class CatalogService {
 	private final String poster_size = "w342";
 
 
+
 	@Autowired
-	public CatalogService(RestTemplate template){
-		this.template = template;
+	public CatalogService(@LoadBalanced RestTemplate loadBalancedRestTemplate){
+		this.template = loadBalancedRestTemplate;
 	}
 
 	/**
@@ -45,10 +47,15 @@ public class CatalogService {
 	}
 
 	public List<Genre> randomGenres(int howMany){
-		List<Genre> genres = template.exchange("http://SPRINGBOX-CATALOG/genres",
-												HttpMethod.GET,
-												null,
-												new ParameterizedTypeReference<List<Genre>>(){}).getBody();
+		List<Genre> genres = null;
+		try {
+			genres = template.exchange("http://SPRINGBOX-CATALOG/genres",
+					HttpMethod.GET,
+					null,
+					new ParameterizedTypeReference<List<Genre>>(){}).getBody();
+		}catch (Exception e){
+			e.printStackTrace();
+		}
 		Collections.shuffle(genres);
 		return genres.subList(0,howMany);
 	}

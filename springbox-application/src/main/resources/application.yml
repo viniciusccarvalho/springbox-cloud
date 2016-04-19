@@ -3,15 +3,25 @@ server:
 ribbon:
   IsSecure: false
 
+debug: true
 security:
-  basic:
-    enabled: false
-management:
-  security:
-    enabled: false
+  user:
+    password: none
+  oauth2:
+    client:
+      access-token-uri: http://localhost:9999/uaa/oauth/token
+      userAuthorizationUri: http://localhost:9999/uaa/oauth/authorize
+      client-id: springbox
+      client-secret: springrocks
+    resource:
+      user-info-uri: http://localhost:9999/uaa/user
+      token-info-uri: http://localhost:9999/uaa/oauth/check_token
 zuul:
   routes:
     springbox-catalog: /catalog/**
     springbox-ratings: /ratings/**
     springbox-recommendations: /recommendations/**
+    user:
+      path: /user/**
+      url: http://localhost:9999/uaa/user
 
